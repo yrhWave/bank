@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts-config PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+        "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+
+    <form-beans>
+        <form-bean name="loginForm" type="com.yrh.bank.forms.loginActionForm"/>
+        <form-bean name="registerForm" type="com.yrh.bank.forms.registerActionForm"/>
+        <form-bean name="managerForm" type="com.yrh.bank.forms.managerActionForm"/>
+    </form-beans>
+
+    <global-exceptions>
+        <exception key="error.exception"
+                   type="com.yrh.bank.util.AppException"
+                   handler="com.yrh.bank.util.DrpExceptionHandler"/>
+        <!-- path="/WEB-INF/jsp/error.jsp"/>-->
+
+    </global-exceptions>
+
+    <global-forwards>
+        <forward name="login" path="/login.jsp" redirect="true"/>
+        <forward name="balance" path="/WEB-INF/jsp/balance.jsp"/>
+        <forward name="success" path="/WEB-INF/jsp/success.jsp"/>
+
+    </global-forwards>
+    <action-mappings>
+        <action path="/login"
+                type="com.yrh.bank.actions.loginAction"
+                name="loginForm"
+                scope="request"
+                input="/loginError.jsp"
+        >
+            <forward name="success" path="/WEB-INF/jsp/mainFrame.jsp"/>
+            <forward name="loginError" path="/loginError.jsp"/>
+        </action>
+
+        <action path="/register"
+                type="com.yrh.bank.actions.registerAction"
+                name="registerForm"
+                scope="request"
+                input="/loginError.jsp"
+        >
+            <forward name="success" path="/login.jsp"/>
+            <forward name="loginError" path="/loginError.jsp"/>
+        </action>
+
+        <action path="/inquiry"
+                type="com.yrh.bank.actions.inquiryAction"
+                name="managerForm"
+                scope="request"
+                input="/WEB-INF/jsp/error.jsp"
+        >
+            <forward name="inquiry" path="/WEB-INF/jsp/balance.jsp" />
+        </action>
+
+        <action path="/deposit"
+                type="com.yrh.bank.actions.depositAction"
+                name="managerForm"
+                scope="request"
+                input="/WEB-INF/jsp/error.jsp"
+        >
+        </action>
+
+        <action path="/withdrawals"
+                type="com.yrh.bank.actions.withdrawalsAction"
+                name="managerForm"
+                scope="request"
+                input="/WEB-INF/jsp/error.jsp"
+        >
+        </action>
+
+        <action path="/transfer"
+                type="com.yrh.bank.actions.transferAction"
+                name="managerForm"
+                scope="request"
+                input="/WEB-INF/jsp/error.jsp"
+        >
+        </action>
+
+        <action path="/manager"
+                type="com.yrh.bank.actions.managerAction"
+                name="managerForm"
+                scope="request"
+                parameter="command"
+                input="/WEB-INF/jsp/error.jsp"
+        >
+            <forward name="inquiry" path="/WEB-INF/jsp/balance.jsp" />
+        </action>
+
+        <action path="/changelan"
+                type="com.yrh.bank.actions.ChangeLanguageAction"
+
+        >
+            <forward name="success" path="/login.jsp" redirect="true"/>
+        </action>
+    </action-mappings>
+
+    <message-resources parameter="res.MessageResources" />
+</struts-config>

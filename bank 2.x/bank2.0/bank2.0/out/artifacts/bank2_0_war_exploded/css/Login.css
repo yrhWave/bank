@@ -1,0 +1,250 @@
+@charset "utf-8";
+/* CSS Document */
+html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-style: sans-serif; /*字体*/
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #24282E; /*颜色*/
+}
+
+#login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -150px 0 0 -150px;
+    width: 300px;
+    height: 300px;
+}
+
+#main {
+    position: absolute;
+    top: 50%;
+    left: 37%;
+    margin: -150px 0 0 -150px;
+    width: 690px;
+    height: 300px;
+}
+#header {
+    text-align: center;
+    width: 60%;
+    height: 100px;
+    position: absolute;
+    left: 20%;
+    top: 10%;
+    border-top: 1px solid #28af7a;
+    border-left: 1px solid #28af7a;
+    border-right: 1px solid #28af7a;
+    border-botton: 5px solid #24282E;
+    background-color: #28af7a;
+    border-radius: 8px;
+}
+
+h1 {
+    color: #ffffff;
+    /*text-shadow:0 0 10px;*/
+    letter-spacing: 1px;
+    text-align: center;
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+h2 {
+    color: #ffffff;
+    /*text-shadow:0 0 10px;*/
+    letter-spacing: 1px;
+    text-align: center;
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+h3 {
+    color: #fff;
+    text-align: center;
+}
+
+div.card {
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    display: inline-block;
+    border-radius: 10px;
+}
+
+div.header {
+    background-color: #28af7a;
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+div.container {
+    align-content: center;
+    padding: 20px;
+}
+
+.div1 {
+    width: 400px;
+    height: 100px;
+    border: 3px solid #28af7a;
+    box-sizing: border-box;
+    align: center;
+}
+
+input {
+    width: 350px;
+    height: 40px;
+    margin-bottom: 10px;
+    outline: none;
+    padding: 10px;
+    font-size: 13px;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 1px;
+    border-top: 1px solid #312E3D;
+    border-left: 1px solid #312E3D;
+    border-right: 1px solid #312E3D;
+    border-bottom: 1px solid #56536A;
+    border-radius: 4px;
+    background-color: #2D2D3F;
+}
+
+.but {
+    width: 350px;
+    min-height: 30px;
+    display: block;
+    background-color: #28af7a;
+    border: 1px solid #28af7a;
+    color: #fff;
+    padding: 9px 14px;
+    font-size: 15px;
+    line-height: normal;
+    border-radius: 5px;
+    margin: 0;
+}
+
+.but:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.button {
+    width: 350px;
+    min-height: 30px;
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #28af7a;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 15px;
+    padding: 9px 14px;
+
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.button span:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.button:hover span {
+    padding-right: 25px;
+}
+
+.button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+.button2 {
+    width: 350px;
+    min-height: 30px;
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #28af7a;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 15px;
+    padding: 9px 14px;
+
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.button2 span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.button2 span:after {
+    content: '«';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: -20px;
+    transition: 0.5s;
+}
+
+.button2:hover span {
+    padding-left: 25px;
+}
+
+.button2:hover span:after {
+    opacity: 1;
+    left: 0;
+}
+
+p {
+
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+}
+
+a:link {
+    text-decoration: none;
+    color: #ffffdc
+}
+
+/* unvisited link */
+a:visited {
+    text-decoration: none;
+    color: #ffffdc
+}
+
+/* visited link */
+a:hover {
+    text-decoration: underline;
+    color: #009DCD
+}
+
+/* mouse over link */
+a:active {
+    text-decoration: underline;
+    color: #25869e
+}
+
+/* selected link */

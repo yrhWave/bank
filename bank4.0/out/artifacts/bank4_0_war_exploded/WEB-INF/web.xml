@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <welcome-file-list>
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list>
+
+    <filter>
+        <filter-name>encoding</filter-name>
+        <filter-class>com.yrh.bank.filter.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>charset</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encoding</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <servlet>
+        <servlet-name>qu</servlet-name>
+        <jsp-file>/WEB-INF/jsp/deposit.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>qu</servlet-name>
+        <url-pattern>/deposit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>cun</servlet-name>
+        <jsp-file>/WEB-INF/jsp/withdrawals.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>cun</servlet-name>
+        <url-pattern>/withdrawals</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>zhuan</servlet-name>
+        <jsp-file>/WEB-INF/jsp/transfer.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>zhuan</servlet-name>
+        <url-pattern>/transfer</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>tui</servlet-name>
+        <jsp-file>/WEB-INF/jsp/logout.jsp</jsp-file>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>tui</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>action</servlet-name>
+        <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+        <init-param>
+            <param-name>config</param-name>
+            <param-value>/WEB-INF/struts-config.xml</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>action</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+</web-app>
