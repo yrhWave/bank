@@ -1,0 +1,166 @@
+package com.cx.bank.dao;
+
+import java.io.*;
+import java.util.InputMismatchException;
+import java.util.Properties;
+import java.util.Scanner;
+import com.cx.bank.model.*;
+import com.cx.bank.util.*;
+/**
+ *持久层
+ *@author 6423
+ *@version 2018.7.7
+ */
+
+ public class BankDaoImpl implements BankDaoInterface
+ {
+	 private static BankDaoImpl bankdaoimpl;
+	 //private MoneyBean s=MoneyBean.getMoneyBean();
+	 private UserBean u=new UserBean();
+	 private MD5 md5=new MD5();
+	/**
+	  *存储余额到数据中
+	  *@param double money
+	  *@return 无
+	  *@throws IOException
+	  */
+	 public void saveMoney(double money)throws IOException{
+		 File file=new File(u.getUserName()+".properties");
+		 FileInputStream fos=new FileInputStream(file);
+		 Properties prop=new Properties();
+		 prop.load(fos);
+		 fos.close();
+		 prop.setProperty("money",String.valueOf(money));
+		 FileOutputStream fos1=new FileOutputStream(file);
+		 prop.store(fos1,"");
+		 fos1.close();
+	 }
+	/**
+	*用户注册
+	*@param String userName 用户名
+	*@param String passward 密码
+	*@throws IOException
+	*@return boolean
+	*/
+	 public boolean register(String userName,String password)throws IOException{
+		 File file=new File(userName+".properties");
+		if(file.exists()){
+			System.out.println("该用户名已被注册");
+			return false;
+		}
+		else{
+			FileOutputStream fos1=new FileOutputStream(file);
+			Properties prop=new Properties();
+			prop.setProperty("userName",userName);
+			prop.setProperty("password",md5.getMD5(password));//给用户密码进行MD5加密
+			//prop.setProperty("money",String.valueOf(0.0));
+			prop.setProperty("money","10");
+			prop.store(fos1,"");
+			fos1.close();
+			return true;
+			}
+	 }
+	 /**
+	  *用户登录
+	  *@param String userName 用户名
+	  *@param String password 密码
+	  *@return boolean
+	  *@throws IOException
+	  */
+	 public boolean login(String userName,String password)throws IOException{
+		File file=new File(userName+".properties");
+		  //判断用户名是否已经存在
+		  if(file.exists()){
+			Properties prop=new Properties();
+			FileInputStream fos=new FileInputStream(file);
+			prop.load(fos);
+				//判断密码是否输入正确
+			  if(md5.getMD5(password).equals(prop.getProperty("password"))){
+				  System.out.println("登陆成功");
+				  u.setUserName(userName);
+				  fos.close();
+				  return true;
+			  }
+			  else{
+				  System.out.println("密码错误请重新登录");
+				  fos.close();			 
+				  return false;
+			  }
+		  }
+		  else{
+			  System.out.println("改用户名不存在");
+			  //fos.close();
+			  return false;
+			  }
+	 }
+	 /**
+	*账户转账
+	*@param String 转账账户名
+	*@param double 转账金额
+	*@return boolean
+	*@Exception throws IOException
+	*/
+	public boolean transfer(String name)throws IOException,InputMismatchException{
+		File file=new File(u.getUserName()+".properties");
+		File file1=new File(name+".properties");
+		FileInputStream fos=new FileInputStream(file);
+		Properties prop=new Properties();
+		prop.load(fos);
+		fos.close();
+		if(file1.exists()){
+			FileInputStream fos1=new FileInputStream(file1);
+			Properties prop1=new Properties();
+			prop1.load(fos1);
+			fos1.close();
+			Scanner in1=new Scanner(System.in);
+			System.out.println("请输入转账金额");
+			double money=in1.nextDouble();
+			if(Double.parseDouble(prop.getProperty("money"))>money){
+				double d0=Double.parseDouble(prop.getProperty("money"))-money;
+				prop.setProperty("money",String.valueOf(d0));
+				FileOutputStream fos2=new FileOutputStream(file);
+				prop.store(fos2,"");
+				fos2.close();
+				double d1=Double.parseDouble(prop1.getProperty("money"))-money;
+				prop1.setProperty("money",String.valueOf(d1));
+				FileOutputStream fos3=new FileOutputStream(file1);
+				prop.store(fos3,"");
+				fos3.close();
+				return true;
+			}
+			else{
+				System.out.println("余额不足无法转账");
+				return false;
+			}
+
+		}
+		else{
+			System.out.println("账户不存在");
+			return false;
+		}
+	}
+	/**
+	*获取余额
+	*@param 无
+	*@return double
+	*@throws IOException
+	*/
+	public double getBalance()throws IOException{
+		File file=new File(u.getUserName()+".properties");
+		System.out.println(u.getUserName());
+		System.out.println(file.exists());
+		FileInputStream fos=new FileInputStream(file);
+		Properties prop=new Properties();
+		prop.load(fos);
+		fos.close();
+		double money=(Double.parseDouble(prop.getProperty("money")));
+		return money;
+	}
+
+	 public static BankDaoImpl getBankDaoImpl(){
+		 if(bankdaoimpl==null)
+			 bankdaoimpl=new BankDaoImpl();
+		 return bankdaoimpl;
+
+	 }
+ }
